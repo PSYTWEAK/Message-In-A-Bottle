@@ -45,7 +45,7 @@ contract MessageInABottle is ERC721, Ownable {
         string memory svgString = string(
             abi.encodePacked(
 
-                "<svg viewBox='0 0 240 80' xmlns='http://www.w3.org/2000/svg'><style>.small { font: italic 13px sans-serif; }</style><text x='55' y='55' class='small'>",
+                "<svg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'><style>.small { font: italic 13px sans-serif; color: indigo; }</style><rect width='100%' height='100%' fill='azure'/><text x='55' y='55' class='small'>",
                 _message[tokenId],
                 "</text></svg>")
         );
@@ -61,7 +61,19 @@ contract MessageInABottle is ERC721, Ownable {
         view
         returns (string memory)
     {
-        string memory metadataString = string(abi.encodePacked('{"display_type": "Message", "trait_type": "Message", "value":',"message",'}'));
+    string memory metadataString;
+    metadataString = string(
+                abi.encodePacked(
+                    metadataString,
+                    '{"trait_type":"',
+                    'test',
+                    '","value":"',
+                    '224',
+                    '"},'
+                )
+            );
+
+        metadataString = string(abi.encodePacked(metadataString, '{"display_type": "Test", "trait_type": "Test", "value":"10"}'));
 
         return string(abi.encodePacked("[", metadataString, "]"));
     }
